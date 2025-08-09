@@ -1274,8 +1274,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 8363094}
+  _aiBehaviour: {fileID: 11400000, guid: fc940920ef9a4284b889e445de02b1b3, type: 2}
   _gameConfig: {fileID: 11400000, guid: 998a4f00462c2b64d9055a37f2c79c8c, type: 2}
   _tankConfig: {fileID: 11400000, guid: d4de5fd28b9db7a418e3c6a695992ed8, type: 2}
+  _aiConfig: {fileID: 11400000, guid: 763afc4d01d2e8442af91d78daae0572, type: 2}
   _botsGroup: {fileID: 1631967954}
   _projectilesGroup: {fileID: 1617071961}
 --- !u!1 &1616580735

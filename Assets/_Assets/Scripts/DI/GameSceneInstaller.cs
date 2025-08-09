@@ -8,12 +8,17 @@ namespace Game.DI
     {
         [SerializeField]
         private Player _player;
+        [SerializeField]
+        private AIBehaviour _aiBehaviour;
 
         [Header("Configs")]
         [SerializeField]
         private GameConfig _gameConfig;
         [SerializeField]
         private TankConfig _tankConfig;
+        [SerializeField]
+        private AIConfig _aiConfig;
+        
 
         [Header("Groups")]
         [SerializeField]
@@ -24,9 +29,11 @@ namespace Game.DI
         public override void InstallBindings()
         {
             Container.BindInstance(_player);
+            Container.BindInstance(Instantiate(_aiBehaviour));
 
             Container.BindInstance(Instantiate(_gameConfig));
             Container.BindInstance(Instantiate(_tankConfig));
+            Container.BindInstance(Instantiate(_aiConfig));
 
             Container.BindInstance(_botsGroup).WithId(Constants.BotsId);
             Container.BindInstance(_projectilesGroup).WithId(Constants.ProjectilesId);

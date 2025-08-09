@@ -1,4 +1,5 @@
-﻿using Evolutex.Evolunity.Extensions;
+﻿using System.Collections;
+using Evolutex.Evolunity.Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,11 @@ namespace Game
             base.Awake();
 
             _behaviour.Initialize(_tank);
+        }
+
+        private IEnumerator Start()
+        {
+            yield return _behaviour.BehaviourCoroutine();
         }
 
         public void RandomizePosition()

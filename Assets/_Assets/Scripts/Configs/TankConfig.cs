@@ -2,7 +2,7 @@
 
 namespace Game.Configs
 {
-    [CreateAssetMenu(fileName = "Tank Config", menuName = "Game/Configs/Tank Config", order = 0)]
+    [CreateAssetMenu(fileName = nameof(TankConfig), menuName = "Game/Configs/" +  nameof(TankConfig), order = 0)]
     public class TankConfig : ScriptableObject
     {
         /// <summary>

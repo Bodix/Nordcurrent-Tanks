@@ -9,7 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37646c5b81ee4fc985d375bf55a253d6, type: 3}
-  m_Name: Game Config
+  m_Script: {fileID: 11500000, guid: 5b06460a1fc34e3b924f5e61aa22e346, type: 3}
+  m_Name: AggressiveAIBehaviour
   m_EditorClassIdentifier: 
-  BotsCount: 3
