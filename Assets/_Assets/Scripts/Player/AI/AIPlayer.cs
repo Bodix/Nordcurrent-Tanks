@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using Evolutex.Evolunity.Extensions;
+﻿using Evolutex.Evolunity.Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +9,10 @@ namespace Game
         [Inject]
         private AIBehaviour _behaviour;
 
-        private IEnumerator Start()
+        private void Start()
         {
             _behaviour.Initialize(_tank);
-
-            yield return _behaviour.BehaviourCoroutine();
+            _behaviour.Launch(this);
         }
 
         public void RandomizePosition()

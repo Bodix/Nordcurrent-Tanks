@@ -28,7 +28,13 @@ namespace Game.DI
         public override void InstallBindings()
         {
             Container.BindInstance(_player);
-            Container.Bind<AIBehaviour>().FromMethod(() => Instantiate(_aiBehaviour));
+            Container.Bind<AIBehaviour>().FromMethod(() =>
+            {
+                AIBehaviour behaviour = Instantiate(_aiBehaviour);
+                Container.Inject(behaviour);
+
+                return behaviour;
+            });
 
             Container.BindInstance(Instantiate(_gameConfig));
             Container.BindInstance(Instantiate(_tankConfig));

@@ -16,13 +16,13 @@ namespace Game
         {
             base.Awake();
 
-            _inputReader.MoveInput += _tank.Move;
+            _inputReader.MoveInput += _tank.HandleInput;
             _inputReader.FireInput += _tank.Shoot;
         }
 
         private void OnDestroy()
         {
-            _inputReader.MoveInput -= _tank.Move;
+            _inputReader.MoveInput -= _tank.HandleInput;
             _inputReader.FireInput -= _tank.Shoot;
         }
 

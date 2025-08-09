@@ -24,6 +24,12 @@ namespace Game
             _tank = tank;
         }
 
+        public void Launch(MonoBehaviour coroutineRunner)
+        {
+            coroutineRunner.StartCoroutine(MovementCoroutine());
+            coroutineRunner.StartCoroutine(RotationCoroutine());
+        }
+
         public void HandleCollision(Collision collision)
         {
             if (collision.gameObject.layer == UnityConstants.Layer.Ground)
@@ -31,15 +37,23 @@ namespace Game
             }
         }
 
-        public IEnumerator BehaviourCoroutine()
+        private IEnumerator MovementCoroutine()
         {
             while (IsActive)
             {
                 yield return _waitForFixedUpdateInstruction;
 
-                _elapsedRotateChangeTime += Time.fixedDeltaTime;
+                _tank.Move(1);
+            }
+        }
 
-                _tank.Move(new Vector2(0, 1));
+        private IEnumerator RotationCoroutine()
+        {
+            while (IsActive)
+            {
+                yield return new WaitForSeconds(_config.RandomRotationInterval.RandomWithin);
+
+                _tank.Rotate(1);
             }
         }
     }

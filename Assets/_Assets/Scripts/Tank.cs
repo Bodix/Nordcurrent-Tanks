@@ -36,13 +36,24 @@ namespace Game
             Kill();
         }
 
-        public void Move(Vector2 input)
+        public void HandleInput(Vector2 input)
         {
-            // These methods of movement and rotation were used to ensure that the units of measurement worked correctly (ignoring mass).
+            Move(input.y);
+            Rotate(input.x);
+        }
+
+        public void Move(float speedMultiplier)
+        {
+            // Theis method of movement was used to ensure that the units of measurement worked correctly (ignoring mass).
             _rigidbody.MovePosition(_rigidbody.position
-                + _rigidbody.rotation * new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
+                + _rigidbody.rotation * new Vector3(0, 0, speedMultiplier) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
+        }
+
+        public void Rotate(float speedMultiplier)
+        {
+            // This method rotation was used to ensure that the units of measurement worked correctly (ignoring mass).
             _rigidbody.MoveRotation(_rigidbody.rotation
-                * Quaternion.Euler(0, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
+                * Quaternion.Euler(0, speedMultiplier * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
         }
 
         public void Shoot()
