@@ -19,5 +19,9 @@ namespace Game
                     (-GameConfig.BotSpawnLimits.y / 2, GameConfig.BotSpawnLimits.y / 2)),
                 Quaternion.Euler(0, Random.Range(0, 360), 0));
         }
+
+        protected override void HandleCollision(Collision collision)
+        {
+        }
     }
 }

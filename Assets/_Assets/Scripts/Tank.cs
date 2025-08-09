@@ -18,7 +18,8 @@ namespace Game
 
         private Rigidbody _rigidbody;
 
-        public event Action Destroyed;
+        public event Action<Collision> Collided;
+        public event Action Killed;
 
         private void Awake()
         {
@@ -27,8 +28,7 @@ namespace Game
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.collider.GetComponent<Tank>())
-                Kill();
+            Collided?.Invoke(collision);
         }
 
         public void TakeDamage()
@@ -65,11 +65,11 @@ namespace Game
             gameObject.SetActive(true);
         }
 
-        private void Kill()
+        public void Kill()
         {
             gameObject.SetActive(false);
 
-            Destroyed?.Invoke();
+            Killed?.Invoke();
         }
 
         private void TryDamage(RaycastHit hit)

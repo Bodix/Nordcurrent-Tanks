@@ -13,9 +13,11 @@ namespace Game.Configs
         /// In degrees per second.
         /// </summary>
         public float RotationSpeed = 180f;
+        
         /// <summary>
         /// In meters per second.
         /// </summary>
+        [Space]
         public float ShellSpeed = 20f;
         public Projectile ShellPrefab;
     }
