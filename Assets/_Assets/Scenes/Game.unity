@@ -262,6 +262,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8173860642382177805, guid: 0f19bc4c3c514c3439f50ffef846283b, type: 3}
   m_PrefabInstance: {fileID: 178729705}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &260380483 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6816394477244056067, guid: 2b22ac09e75b81041b19e942ca6c9937, type: 3}
+  m_PrefabInstance: {fileID: 842580702852333463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &596514700
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453,8 +458,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1541806258}
-  - {fileID: 1491333410}
   - {fileID: 994878992}
+  - {fileID: 1491333410}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787551928
@@ -688,7 +693,7 @@ GameObject:
   - component: {fileID: 994878992}
   - component: {fileID: 994878993}
   m_Layer: 0
-  m_Name: Bot Spawner
+  m_Name: Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -718,11 +723,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 994878991}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f321e8b502e347ec80c7011f38b2713e, type: 3}
+  m_Script: {fileID: 11500000, guid: e22905a750854cfa8214250c8ba2472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _botPrefab: {fileID: 8851207896108851830, guid: 08f0adb9aff8ca749a28439ec67b1ea4, type: 3}
-  _spawnLimits: {x: 19, y: 19}
 --- !u!1001 &1010021975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -961,7 +965,7 @@ MonoBehaviour:
   m_StreamingVersion: 20230301
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 8363092}
+    TrackingTarget: {fileID: 260380483}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:

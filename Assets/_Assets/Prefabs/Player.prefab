@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tank: {fileID: 5484028204462064065}
+  _spawnPoints: []
 --- !u!1001 &1228643156728778195
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -56,7 +57,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5347859433542512537, guid: bee4036a82e185f488ecd868a15c857d, type: 3}
       propertyPath: m_Name
-      value: Tank
+      value: Player Tank
       objectReference: {fileID: 0}
     - target: {fileID: 5734690741663928272, guid: bee4036a82e185f488ecd868a15c857d, type: 3}
       propertyPath: m_LocalPosition.x
