@@ -454,6 +454,7 @@ Transform:
   m_Children:
   - {fileID: 1541806258}
   - {fileID: 1491333410}
+  - {fileID: 994878992}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &787551928
@@ -676,6 +677,52 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!1 &994878991
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 994878992}
+  - component: {fileID: 994878993}
+  m_Layer: 0
+  m_Name: Bot Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &994878992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994878991}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 753062852}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &994878993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994878991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f321e8b502e347ec80c7011f38b2713e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _botPrefab: {fileID: 8851207896108851830, guid: 08f0adb9aff8ca749a28439ec67b1ea4, type: 3}
+  _spawnLimits: {x: 19, y: 19}
 --- !u!1001 &1010021975
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1060,7 +1107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 8363094}
-  _gameConfig: {fileID: 0}
+  _gameConfig: {fileID: 11400000, guid: 998a4f00462c2b64d9055a37f2c79c8c, type: 2}
   _tankConfig: {fileID: 11400000, guid: d4de5fd28b9db7a418e3c6a695992ed8, type: 2}
 --- !u!1 &1766945082
 GameObject:
