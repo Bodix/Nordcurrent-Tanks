@@ -11,8 +11,8 @@ namespace Game
 
         private void Start()
         {
-            _behaviour.Initialize(_tank);
-            _behaviour.Launch(this);
+            _behaviour.Initialize(this, _tank);
+            _behaviour.Launch();
         }
 
         public void RandomizePosition()
