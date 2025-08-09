@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 383ddbab74ad45029009a28cffd978e9, type: 3}
   m_Name: Tank Config
   m_EditorClassIdentifier: 
-  Speed: 1
+  MoveSpeed: 3
+  RotationSpeed: 180

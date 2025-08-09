@@ -4,23 +4,18 @@ using Zenject;
 
 namespace Game
 {
-    [RequireComponent(typeof(BoxCollider))]
     public class Tank : MonoBehaviour
     {
+        [SerializeField]
+        private Rigidbody _rigidbody;
+
         [Inject]
         private TankConfig _tankConfig;
 
-        private BoxCollider _boxCollider;
-
-        private void Awake()
-        {
-            _boxCollider = GetComponent<BoxCollider>();
-        }
-
         public void Move(Vector2 input)
         {
-            transform.Translate(new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
-            transform.Rotate(Vector3.up, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime);
+            _rigidbody.MovePosition(_rigidbody.position + _rigidbody.rotation * new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
+            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
         }
     }
 }
