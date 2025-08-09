@@ -1,10 +1,14 @@
 ﻿using Evolutex.Evolunity.Extensions;
 using UnityEngine;
+using Zenject;
 
 namespace Game
 {
     public class AIPlayer : AbstractPlayer
     {
+        [Inject]
+        private AIBehaviour _behaviour;
+
         public void RandomizePosition()
         {
             _tank.Respawn(GetRespawnPose());
@@ -22,6 +26,7 @@ namespace Game
 
         protected override void HandleCollision(Collision collision)
         {
+            _behaviour.HandleCollision(collision);
         }
     }
 }

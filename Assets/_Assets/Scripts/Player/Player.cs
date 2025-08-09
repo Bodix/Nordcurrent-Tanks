@@ -1,4 +1,3 @@
-using System;
 using Evolutex.Evolunity.Extensions;
 using UnityEngine;
 using Zenject;
