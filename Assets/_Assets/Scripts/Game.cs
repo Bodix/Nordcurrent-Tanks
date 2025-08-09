@@ -8,16 +8,18 @@ namespace Game
     {
         [SerializeField]
         private AIPlayer _aiPlayerPrefab;
-        [Inject(Id = Constants.BotsId)]
-        private Transform _botsGroup;
 
         [Inject]
+        private DiContainer _container;
+        [Inject]
         private GameConfig _gameConfig;
+        [Inject(Id = Constants.BotsId)]
+        private Transform _botsGroup;
 
         private void Start()
         {
             for (int i = 0; i < _gameConfig.BotsCount; i++)
-                Instantiate(_aiPlayerPrefab, _botsGroup).RandomizePosition();
+                _container.InstantiatePrefabForComponent<AIPlayer>(_aiPlayerPrefab, _botsGroup).RandomizePosition();
         }
     }
 }

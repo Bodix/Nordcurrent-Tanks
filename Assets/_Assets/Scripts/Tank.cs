@@ -18,7 +18,8 @@ namespace Game
 
         private Rigidbody _rigidbody;
 
-        public event Action<Collision> Collided;
+        public event Action<Collision> CollisionEnter;
+        public event Action<Collision> CollisionExit;
         public event Action Killed;
 
         private void Awake()
@@ -28,7 +29,12 @@ namespace Game
 
         private void OnCollisionEnter(Collision collision)
         {
-            Collided?.Invoke(collision);
+            CollisionEnter?.Invoke(collision);
+        }
+        
+        private void OnCollisionExit(Collision collision)
+        {
+            CollisionExit?.Invoke(collision);
         }
 
         public void TakeDamage()

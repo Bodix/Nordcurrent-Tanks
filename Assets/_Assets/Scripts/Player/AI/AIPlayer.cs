@@ -1,5 +1,4 @@
 ﻿using Evolutex.Evolunity.Extensions;
-using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -10,11 +9,10 @@ namespace Game
         [Inject]
         private AIBehaviour _behaviour;
 
-        [ShowNativeProperty]
-        public AIBehaviour Behaviour => _behaviour;
-
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
+
             _behaviour.Initialize(this, _tank);
             _behaviour.LaunchPersistentMovement();
         }
@@ -34,9 +32,14 @@ namespace Game
                 Quaternion.Euler(0, Random.Range(0, 360), 0));
         }
 
-        protected override void HandleCollision(Collision collision)
+        protected override void HandleCollisionEnter(Collision collision)
         {
-            _behaviour.HandleCollision(collision);
+            _behaviour.HandleCollisionEnter(collision);
+        }
+
+        protected override void HandleCollisionExit(Collision collision)
+        {
+            _behaviour.HandleCollisionExit(collision);
         }
     }
 }

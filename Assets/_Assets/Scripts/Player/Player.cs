@@ -31,10 +31,14 @@ namespace Game
             return _spawnPoints.Random().GetPose();
         }
 
-        protected override void HandleCollision(Collision collision)
+        protected override void HandleCollisionEnter(Collision collision)
         {
             if (collision.collider.GetComponent<Tank>())
                 _tank.Kill();
+        }
+
+        protected override void HandleCollisionExit(Collision collision)
+        {
         }
     }
 }

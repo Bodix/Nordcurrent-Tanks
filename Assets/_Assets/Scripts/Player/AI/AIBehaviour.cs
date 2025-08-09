@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Game.Configs;
 using NaughtyAttributes;
 using UnityConstants;
@@ -24,6 +26,12 @@ namespace Game
         public bool IsActive { get; set; } = true;
         [ShowNativeProperty]
         public bool CollisionCoroutineActive => _collisionCoroutine != null;
+        private List<Collision> _currentCollisions;
+
+        private void Awake()
+        {
+            _currentCollisions = new List<Collision>();
+        }
 
         public void Initialize(MonoBehaviour coroutineRunner, Tank tank)
         {
@@ -37,17 +45,10 @@ namespace Game
             _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
         }
 
-        private void StopPersistentMovement()
+        public void HandleCollisionEnter(Collision collision)
         {
-            _coroutineRunner.StopCoroutine(_movementCoroutine);
-            _coroutineRunner.StopCoroutine(_rotationCoroutine);
+            _currentCollisions.Add(collision);
 
-            _movementCoroutine = null;
-            _rotationCoroutine = null;
-        }
-
-        public void HandleCollision(Collision collision)
-        {
             if (collision.gameObject.CompareTag(Tag.Wall))
             {
                 _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(180));
@@ -58,7 +59,21 @@ namespace Game
             }
         }
 
+        public void HandleCollisionExit(Collision collision)
+        {
+            _currentCollisions.Remove(collision);
+        }
+
         protected abstract IEnumerator ShootCoroutine();
+
+        private void StopPersistentMovement()
+        {
+            _coroutineRunner.StopCoroutine(_movementCoroutine);
+            _coroutineRunner.StopCoroutine(_rotationCoroutine);
+
+            _movementCoroutine = null;
+            _rotationCoroutine = null;
+        }
 
         private IEnumerator PersistentMovementCoroutine()
         {
@@ -82,7 +97,7 @@ namespace Game
 
         private IEnumerator ChangeRotationCoroutine(float rotationDegrees)
         {
-            float sign = Mathf.Sign(Random.Range(-1, 1));
+            float sign = Mathf.Sign(UnityEngine.Random.Range(-1, 1));
             float prevRotation = Tank.transform.rotation.eulerAngles.y;
             while (Mathf.Abs(Tank.transform.rotation.eulerAngles.y - prevRotation) < rotationDegrees)
             {
