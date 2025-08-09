@@ -6,7 +6,7 @@ namespace Game.DI
     {
         public override void InstallBindings()
         {
-            Container.Bind<MainInputActions>().AsSingle();
+            Container.Bind<InputReader>().FromNewComponentOnNewGameObject().AsSingle();
         }
     }
 }
