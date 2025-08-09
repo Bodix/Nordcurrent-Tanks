@@ -17,6 +17,8 @@ namespace Game
         protected Tank Tank;
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private MonoBehaviour _coroutineRunner;
+        private Coroutine _movementCoroutine;
+        private Coroutine _rotationCoroutine;
         private Coroutine _collisionCoroutine;
 
         public bool IsActive { get; set; } = true;
@@ -29,18 +31,30 @@ namespace Game
             Tank = tank;
         }
 
-        public void Launch()
+        public void LaunchPersistentMovement()
         {
-            _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
-            _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
+            _movementCoroutine = _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
+            _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
+        }
+
+        private void StopPersistentMovement()
+        {
+            _coroutineRunner.StopCoroutine(_movementCoroutine);
+            _coroutineRunner.StopCoroutine(_rotationCoroutine);
+
+            _movementCoroutine = null;
+            _rotationCoroutine = null;
         }
 
         public void HandleCollision(Collision collision)
         {
-            if (collision.gameObject.CompareTag(Tag.Wall)
-                || collision.gameObject.CompareTag(Tag.Player))
+            if (collision.gameObject.CompareTag(Tag.Wall))
             {
-                _collisionCoroutine = _coroutineRunner.StartCoroutine(CollisionCoroutine());
+                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(180));
+            }
+            else if (collision.gameObject.layer == Layer.Tank)
+            {
+                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(_config.RotationChangeDegrees));
             }
         }
 
@@ -50,8 +64,6 @@ namespace Game
         {
             while (IsActive)
             {
-                yield return new WaitUntil(() => _collisionCoroutine == null);
-
                 Tank.Move(1);
 
                 yield return _waitForFixedUpdateInstruction;
@@ -62,8 +74,6 @@ namespace Game
         {
             while (IsActive)
             {
-                yield return new WaitUntil(() => _collisionCoroutine == null);
-
                 yield return new WaitForSeconds(_config.RotationChangeRandomInterval.RandomWithin);
 
                 yield return ChangeRotationCoroutine(_config.RotationChangeDegrees);
@@ -82,9 +92,13 @@ namespace Game
             }
         }
 
-        private IEnumerator CollisionCoroutine()
+        private IEnumerator CollisionCoroutine(float rotationDegrees)
         {
-            yield return ChangeRotationCoroutine(180);
+            StopPersistentMovement();
+
+            yield return ChangeRotationCoroutine(rotationDegrees);
+
+            LaunchPersistentMovement();
 
             _collisionCoroutine = null;
         }

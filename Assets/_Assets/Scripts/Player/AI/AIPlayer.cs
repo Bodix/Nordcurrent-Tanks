@@ -1,4 +1,5 @@
 ﻿using Evolutex.Evolunity.Extensions;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -9,10 +10,13 @@ namespace Game
         [Inject]
         private AIBehaviour _behaviour;
 
+        [ShowNativeProperty]
+        public AIBehaviour Behaviour => _behaviour;
+
         private void Start()
         {
             _behaviour.Initialize(this, _tank);
-            _behaviour.Launch();
+            _behaviour.LaunchPersistentMovement();
         }
 
         public void RandomizePosition()
