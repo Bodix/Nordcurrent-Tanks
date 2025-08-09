@@ -14,8 +14,10 @@ namespace Game
 
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private Tank _tank;
+        private float _elapsedRotateChangeTime;
+        // private float _rotateC
 
-        public bool IsActive { get; set; }
+        public bool IsActive { get; set; } = true;
 
         public void Initialize(Tank tank)
         {
@@ -34,6 +36,8 @@ namespace Game
             while (IsActive)
             {
                 yield return _waitForFixedUpdateInstruction;
+
+                _elapsedRotateChangeTime += Time.fixedDeltaTime;
 
                 _tank.Move(new Vector2(0, 1));
             }
