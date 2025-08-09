@@ -1,13 +1,13 @@
-﻿using Game.Configs;
+﻿using System;
+using Game.Configs;
 using UnityEngine;
 using Zenject;
 
 namespace Game
 {
-    public class Tank : MonoBehaviour
+    [RequireComponent(typeof(Rigidbody), typeof(BoxCollider))]
+    public class Tank : MonoBehaviour, IDamageable
     {
-        [SerializeField]
-        private Rigidbody _rigidbody;
         [SerializeField]
         private Transform _muzzleTransform;
 
@@ -15,6 +15,15 @@ namespace Game
         private TankConfig _tankConfig;
         [Inject(Id = Constants.ProjectilesId)]
         private Transform _projectilesGroup;
+
+        private Rigidbody _rigidbody;
+
+        public event Action Destroyed;
+
+        private void Awake()
+        {
+            _rigidbody = GetComponent<Rigidbody>();
+        }
 
         public void Move(Vector2 input)
         {
@@ -31,6 +40,19 @@ namespace Game
                 _muzzleTransform.rotation, _projectilesGroup);
 
             shell.PushForward(_tankConfig.ShellSpeed);
+            shell.Hit += TryDamage;
+        }
+
+        private void TryDamage(RaycastHit hit)
+        {
+            IDamageable damageable = hit.collider.GetComponent<IDamageable>();
+
+            damageable?.TakeDamage();
+        }
+
+        public void TakeDamage()
+        {
+            Destroyed?.Invoke();
         }
     }
 }
