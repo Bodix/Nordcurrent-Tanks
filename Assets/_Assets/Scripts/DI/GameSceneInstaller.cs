@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Game.Configs;
+using UnityEngine;
 using Zenject;
 
 namespace Game.DI
@@ -7,10 +8,19 @@ namespace Game.DI
     {
         [SerializeField]
         private Player _player;
+        // [SerializeField]
+        // private TankConfig _playerTankConfig;
+        // [SerializeField]
+        // private TankConfig _aiTankConfig;
+        [SerializeField]
+        private TankConfig _tankConfig;
 
         public override void InstallBindings()
         {
             Container.BindInstance(_player);
+            // Container.BindInstance(_playerTankConfig).WithId(Constants.PlayerId);
+            // Container.BindInstance(_aiTankConfig).WithId(Constants.ArtificialIntelligenceId);
+            Container.BindInstance(_tankConfig);
         }
     }
 }

@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5734690741663928272}
   - component: {fileID: 6707595878077025298}
-  - component: {fileID: 6083702713880038046}
   - component: {fileID: 1259393111636091187}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,33 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b930cabf94eb459aa03b6ef306d0acdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &6083702713880038046
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5347859433542512537}
-  serializedVersion: 4
-  m_Mass: 30
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &1259393111636091187
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -143,9 +115,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6677609955192169544, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -6407441954677674191, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -5912250462528958071, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2281750829631492217, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: beebb18149149494e95a34e1c87ff970, type: 3}
       propertyPath: m_Name
       value: ArmTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1285068396789745666, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2592851207085736906, guid: beebb18149149494e95a34e1c87ff970, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
