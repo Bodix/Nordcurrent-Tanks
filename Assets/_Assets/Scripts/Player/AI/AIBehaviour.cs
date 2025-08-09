@@ -14,8 +14,6 @@ namespace Game
 
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private Tank _tank;
-        private float _elapsedRotateChangeTime;
-        // private float _rotateC
 
         public bool IsActive { get; set; } = true;
 
@@ -51,9 +49,20 @@ namespace Game
         {
             while (IsActive)
             {
-                yield return new WaitForSeconds(_config.RandomRotationInterval.RandomWithin);
+                yield return new WaitForSeconds(_config.RotationChangeRandomInterval.RandomWithin);
+                yield return ChangeRotationCoroutine();
+            }
+        }
 
-                _tank.Rotate(1);
+        private IEnumerator ChangeRotationCoroutine()
+        {
+            float sign = Mathf.Sign(Random.Range(-1, 1));
+            float prevRotation = _tank.transform.rotation.eulerAngles.y;
+            while (Mathf.Abs(_tank.transform.rotation.eulerAngles.y - prevRotation) < _config.RotationChangeDegrees)
+            {
+                _tank.Rotate(sign);
+
+                yield return _waitForFixedUpdateInstruction;
             }
         }
     }
