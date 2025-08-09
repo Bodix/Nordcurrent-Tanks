@@ -25,6 +25,12 @@ namespace Game
             _rigidbody = GetComponent<Rigidbody>();
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.collider.GetComponent<Tank>())
+                Destroyed?.Invoke();
+        }
+
         public void Move(Vector2 input)
         {
             // These methods of movement and rotation were used to ensure that the units of measurement worked correctly (ignoring mass).
