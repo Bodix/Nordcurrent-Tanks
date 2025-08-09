@@ -9,6 +9,13 @@ namespace Game
         [Inject]
         private AIBehaviour _behaviour;
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            _behaviour.Initialize(_tank);
+        }
+
         public void RandomizePosition()
         {
             _tank.Respawn(GetRespawnPose());
