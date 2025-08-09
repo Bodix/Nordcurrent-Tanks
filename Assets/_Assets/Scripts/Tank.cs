@@ -29,6 +29,8 @@ namespace Game
         {
             Projectile shell = Instantiate(_tankConfig.ShellPrefab, _muzzleTransform.position,
                 _muzzleTransform.rotation, _projectilesGroup);
+
+            shell.PushForward(_tankConfig.ShellSpeed);
         }
     }
 }
