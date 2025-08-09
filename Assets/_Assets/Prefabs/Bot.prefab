@@ -68,6 +68,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2125884882686179470}
     m_Modifications:
+    - target: {fileID: 146997860482513583, guid: bee4036a82e185f488ecd868a15c857d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbd22e568dc6647459d91ef578d882bb, type: 2}
+    - target: {fileID: 5113479522953432021, guid: bee4036a82e185f488ecd868a15c857d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dbd22e568dc6647459d91ef578d882bb, type: 2}
     - target: {fileID: 5347859433542512537, guid: bee4036a82e185f488ecd868a15c857d, type: 3}
       propertyPath: m_Name
       value: Bot Tank

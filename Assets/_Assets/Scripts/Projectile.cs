@@ -1,5 +1,4 @@
 ﻿using System;
-using NaughtyAttributes;
 using UnityEngine;
 
 namespace Game
@@ -44,7 +43,6 @@ namespace Game
             if (_rigidbody.useGravity)
                 direction += Physics.gravity * Time.deltaTime;
             direction = direction.normalized;
-
             float velocityMagnitudeDelta = _rigidbody.velocity.magnitude * Time.deltaTime;
 
             if (Physics.SphereCast(transform.position, ColliderRadius, direction,

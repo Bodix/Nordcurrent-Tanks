@@ -27,6 +27,7 @@ namespace Game
 
         private void Update()
         {
+            // Should be in Update(), because if you use FixedUpdate(), some frames may be skipped.
             bool fireInput = _inputActions.Player.Fire.WasPressedThisFrame();
             if (fireInput)
                 FireInput?.Invoke();
