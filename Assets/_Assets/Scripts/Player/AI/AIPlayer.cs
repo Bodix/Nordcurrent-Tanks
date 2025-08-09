@@ -10,15 +10,10 @@ namespace Game
         [Inject]
         private AIBehaviour _behaviour;
 
-        protected override void Awake()
-        {
-            base.Awake();
-
-            _behaviour.Initialize(_tank);
-        }
-
         private IEnumerator Start()
         {
+            _behaviour.Initialize(_tank);
+
             yield return _behaviour.BehaviourCoroutine();
         }
 

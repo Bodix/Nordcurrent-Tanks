@@ -18,7 +18,6 @@ namespace Game.DI
         private TankConfig _tankConfig;
         [SerializeField]
         private AIConfig _aiConfig;
-        
 
         [Header("Groups")]
         [SerializeField]
