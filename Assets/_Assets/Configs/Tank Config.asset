@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   RotationSpeed: 180
-  ProjectileSpeed: 100
+  ShellSpeed: 20
   ShellPrefab: {fileID: 201293168545719293, guid: ff94ba3b8985b064088ec1fe46ba9dc6, type: 3}
