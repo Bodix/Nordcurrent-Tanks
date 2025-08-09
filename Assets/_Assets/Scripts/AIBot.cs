@@ -5,6 +5,11 @@ namespace Game
 {
     public class AIBot : AbstractPlayer
     {
+        public void RandomizePosition()
+        {
+            _tank.Respawn(GetRespawnPose());
+        }
+
         protected override Pose GetRespawnPose()
         {
             return new Pose(

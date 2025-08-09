@@ -15,26 +15,14 @@ namespace Game
 
         protected virtual void Awake()
         {
-            _tank.Destroyed += DisableTemporarily;
-        }
-
-        public void Respawn()
-        {
-            Pose pose = GetRespawnPose();
-
-            _tank.transform.position = pose.position;
-            _tank.transform.rotation = pose.rotation;
-
-            _tank.gameObject.SetActive(true);
+            _tank.Destroyed += DelayedRespawn;
         }
 
         protected abstract Pose GetRespawnPose();
 
-        private void DisableTemporarily()
+        private void DelayedRespawn()
         {
-            _tank.gameObject.SetActive(false);
-
-            Delay.ForSeconds(GameConfig.RespawnDelay, Respawn, this);
+            Delay.ForSeconds(GameConfig.RespawnDelay, () => _tank.Respawn(GetRespawnPose()), this);
         }
     }
 }

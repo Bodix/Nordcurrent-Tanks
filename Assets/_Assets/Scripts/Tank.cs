@@ -28,7 +28,12 @@ namespace Game
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.collider.GetComponent<Tank>())
-                Destroyed?.Invoke();
+                Kill();
+        }
+
+        public void TakeDamage()
+        {
+            Kill();
         }
 
         public void Move(Vector2 input)
@@ -42,6 +47,9 @@ namespace Game
 
         public void Shoot()
         {
+            if (!gameObject.activeInHierarchy)
+                return;
+
             Projectile shell = Instantiate(_tankConfig.ShellPrefab, _muzzleTransform.position,
                 _muzzleTransform.rotation, _projectilesGroup);
 
@@ -49,16 +57,26 @@ namespace Game
             shell.Hit += TryDamage;
         }
 
+        public void Respawn(Pose pose)
+        {
+            transform.position = pose.position;
+            transform.rotation = pose.rotation;
+
+            gameObject.SetActive(true);
+        }
+
+        private void Kill()
+        {
+            gameObject.SetActive(false);
+
+            Destroyed?.Invoke();
+        }
+
         private void TryDamage(RaycastHit hit)
         {
             IDamageable damageable = hit.collider.GetComponent<IDamageable>();
 
             damageable?.TakeDamage();
-        }
-
-        public void TakeDamage()
-        {
-            Destroyed?.Invoke();
         }
     }
 }

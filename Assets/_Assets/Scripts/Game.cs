@@ -17,7 +17,7 @@ namespace Game
         private void Start()
         {
             for (int i = 0; i < _gameConfig.BotsCount; i++)
-                Instantiate(_botPrefab, _botsGroup).Respawn();
+                Instantiate(_botPrefab, _botsGroup).RandomizePosition();
         }
     }
 }
