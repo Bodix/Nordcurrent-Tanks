@@ -14,8 +14,11 @@ namespace Game
 
         public void Move(Vector2 input)
         {
-            _rigidbody.MovePosition(_rigidbody.position + _rigidbody.rotation * new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
-            _rigidbody.MoveRotation(_rigidbody.rotation * Quaternion.Euler(0, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
+            // These methods of movement and rotation were used to ensure that the units of measurement worked correctly (ignoring mass).
+            _rigidbody.MovePosition(_rigidbody.position
+                + _rigidbody.rotation * new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
+            _rigidbody.MoveRotation(_rigidbody.rotation
+                * Quaternion.Euler(0, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
         }
     }
 }

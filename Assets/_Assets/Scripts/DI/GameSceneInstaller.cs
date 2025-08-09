@@ -8,10 +8,6 @@ namespace Game.DI
     {
         [SerializeField]
         private Player _player;
-        // [SerializeField]
-        // private TankConfig _playerTankConfig;
-        // [SerializeField]
-        // private TankConfig _aiTankConfig;
         [SerializeField]
         private GameConfig _gameConfig;
         [SerializeField]
@@ -20,8 +16,6 @@ namespace Game.DI
         public override void InstallBindings()
         {
             Container.BindInstance(_player);
-            // Container.BindInstance(_playerTankConfig).WithId(Constants.PlayerId);
-            // Container.BindInstance(_aiTankConfig).WithId(Constants.ArtificialIntelligenceId);
             Container.BindInstance(_gameConfig);
             Container.BindInstance(_tankConfig);
         }
