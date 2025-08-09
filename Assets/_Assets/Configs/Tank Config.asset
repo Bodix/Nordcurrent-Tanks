@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 3
   RotationSpeed: 180
+  ShellPrefab: {fileID: 3160345477152632104, guid: ff94ba3b8985b064088ec1fe46ba9dc6, type: 3}
