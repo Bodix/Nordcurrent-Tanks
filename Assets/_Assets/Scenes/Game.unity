@@ -856,7 +856,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22905a750854cfa8214250c8ba2472e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _botPrefab: {fileID: 8851207896108851830, guid: 08f0adb9aff8ca749a28439ec67b1ea4, type: 3}
+  _aiPlayerPrefab: {fileID: 8851207896108851830, guid: 08f0adb9aff8ca749a28439ec67b1ea4, type: 3}
 --- !u!1001 &1010021975
 PrefabInstance:
   m_ObjectHideFlags: 0

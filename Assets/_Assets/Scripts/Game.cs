@@ -7,7 +7,7 @@ namespace Game
     public class Game : MonoBehaviour
     {
         [SerializeField]
-        private AIBot _botPrefab;
+        private AIPlayer _aiPlayerPrefab;
         [Inject(Id = Constants.BotsId)]
         private Transform _botsGroup;
 
@@ -17,7 +17,7 @@ namespace Game
         private void Start()
         {
             for (int i = 0; i < _gameConfig.BotsCount; i++)
-                Instantiate(_botPrefab, _botsGroup).RandomizePosition();
+                Instantiate(_aiPlayerPrefab, _botsGroup).RandomizePosition();
         }
     }
 }

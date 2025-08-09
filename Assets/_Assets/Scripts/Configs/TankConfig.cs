@@ -8,11 +8,11 @@ namespace Game.Configs
         /// <summary>
         /// In meters per second.
         /// </summary>
-        public float MoveSpeed = 1f;
+        public float MoveSpeed = 3f;
         /// <summary>
         /// In degrees per second.
         /// </summary>
-        public float RotationSpeed = 30f;
+        public float RotationSpeed = 180f;
         /// <summary>
         /// In meters per second.
         /// </summary>

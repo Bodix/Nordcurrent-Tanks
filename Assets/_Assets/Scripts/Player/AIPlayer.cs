@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class AIBot : AbstractPlayer
+    public class AIPlayer : AbstractPlayer
     {
         public void RandomizePosition()
         {
