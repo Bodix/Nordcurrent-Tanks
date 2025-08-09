@@ -16,8 +16,6 @@ namespace Game
         {
             base.Awake();
 
-            Debug.Log(GameConfig);
-
             _inputReader.MoveInput += _tank.Move;
             _inputReader.FireInput += _tank.Shoot;
         }
