@@ -26,27 +26,24 @@ namespace Game
             CheckHit();
         }
 
-        public void PushForward(float speed)
+        public void PushForward(float speed, ForceMode mode = ForceMode.Impulse)
         {
-            Push(transform.forward, speed);
+            Push(transform.forward, speed, mode);
         }
 
-        public void Push(Vector3 direction, float speed)
+        public void Push(Vector3 direction, float speed, ForceMode mode = ForceMode.Impulse)
         {
             _rigidbody.rotation = Quaternion.LookRotation(direction);
-            _rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
+            _rigidbody.AddForce(direction * speed, mode);
         }
 
         private void CheckHit()
         {
-            Vector3 direction = _rigidbody.velocity;
-            if (_rigidbody.useGravity)
-                direction += Physics.gravity * Time.deltaTime;
-            direction = direction.normalized;
-            float velocityMagnitudeDelta = _rigidbody.velocity.magnitude * Time.deltaTime;
+            Vector3 direction = _rigidbody.velocity.normalized;
+            float magnitudeDelta = _rigidbody.velocity.magnitude * Time.deltaTime;
 
             if (Physics.SphereCast(transform.position, ColliderRadius, direction,
-                    out RaycastHit hit, velocityMagnitudeDelta, LayerMask))
+                    out RaycastHit hit, magnitudeDelta, LayerMask))
             {
                 Destroy(gameObject);
 

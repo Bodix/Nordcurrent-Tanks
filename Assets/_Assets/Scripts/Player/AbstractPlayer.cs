@@ -15,6 +15,7 @@ namespace Game
 
         protected virtual void Awake()
         {
+            _tank.Collided += HandleCollision;
             _tank.Killed += DelayedRespawn;
         }
 

@@ -54,7 +54,7 @@ namespace Game
                 _muzzleTransform.rotation, _projectilesGroup);
 
             shell.Hit += TryDamage;
-            shell.PushForward(_tankConfig.ShellSpeed);
+            shell.PushForward(_tankConfig.ShellSpeed, ForceMode.VelocityChange);
         }
 
         public void Respawn(Pose pose)
