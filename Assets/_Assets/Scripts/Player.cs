@@ -14,6 +14,7 @@ namespace Game
         private void Awake()
         {
             _inputReader.MoveInput += _tank.Move;
+            _inputReader.FireInputDown += _tank.Shoot;
         }
     }
 }

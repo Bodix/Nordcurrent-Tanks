@@ -13,11 +13,20 @@ namespace Game.DI
         [SerializeField]
         private TankConfig _tankConfig;
 
+        [Header("Groups")]
+        [SerializeField]
+        private Transform _botsGroup;
+        [SerializeField]
+        private Transform _projectilesGroup;
+
         public override void InstallBindings()
         {
             Container.BindInstance(_player);
             Container.BindInstance(_gameConfig);
             Container.BindInstance(_tankConfig);
+
+            Container.BindInstance(_botsGroup).WithId(Constants.BotsId);
+            Container.BindInstance(_projectilesGroup).WithId(Constants.ProjectilesId);
         }
     }
 }

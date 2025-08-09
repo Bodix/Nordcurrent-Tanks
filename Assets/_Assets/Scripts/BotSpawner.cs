@@ -14,6 +14,8 @@ namespace Game
 
         [Inject]
         private GameConfig _gameConfig;
+        [Inject(Id = Constants.BotsId)]
+        private Transform _botsGroup;
 
         private void Awake()
         {
@@ -23,8 +25,9 @@ namespace Game
                     (-_spawnLimits.x / 2, _spawnLimits.x / 2),
                     (0, 0),
                     (-_spawnLimits.y / 2, _spawnLimits.y / 2));
+                Quaternion rotation = Quaternion.Euler(0, Random.Range(0, 360), 0);
 
-                Instantiate(_botPrefab, position, Quaternion.identity);
+                Instantiate(_botPrefab, position, rotation, _botsGroup);
             }
         }
     }

@@ -8,9 +8,13 @@ namespace Game
     {
         [SerializeField]
         private Rigidbody _rigidbody;
+        [SerializeField]
+        private Transform _muzzleTransform;
 
         [Inject]
         private TankConfig _tankConfig;
+        [Inject(Id = Constants.ProjectilesId)]
+        private Transform _projectilesGroup;
 
         public void Move(Vector2 input)
         {
@@ -19,6 +23,12 @@ namespace Game
                 + _rigidbody.rotation * new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
             _rigidbody.MoveRotation(_rigidbody.rotation
                 * Quaternion.Euler(0, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime, 0));
+        }
+
+        public void Shoot()
+        {
+            Projectile shell = Instantiate(_tankConfig.ShellPrefab, _muzzleTransform.position,
+                _muzzleTransform.rotation, _projectilesGroup);
         }
     }
 }
