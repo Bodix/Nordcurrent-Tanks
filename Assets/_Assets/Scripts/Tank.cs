@@ -20,7 +20,7 @@ namespace Game
         public void Move(Vector2 input)
         {
             transform.Translate(new Vector3(0, 0, input.y) * (_tankConfig.MoveSpeed * Time.fixedDeltaTime));
-            transform.Rotate(Vector3.up, input.x * _tankConfig.RotationSpeed);
+            transform.Rotate(Vector3.up, input.x * _tankConfig.RotationSpeed * Time.fixedDeltaTime);
         }
     }
 }
