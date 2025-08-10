@@ -32,11 +32,11 @@ namespace Game
 
         public void LaunchPersistentBehaviour()
         {
+            IsPlayingPersistentBehaviour = true;
+            
             _movementCoroutine = _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
             _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
             _shootingCoroutine = _coroutineRunner.StartCoroutine(ShootingCoroutine());
-
-            IsPlayingPersistentBehaviour = true;
         }
 
         public void HandleCollision(Collision collision)
