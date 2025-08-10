@@ -5,6 +5,7 @@ using Zenject;
 
 namespace Game
 {
+    [SelectionBase]
     public class AIPlayer : AbstractPlayer
     {
         [Inject, ShowNonSerializedField]
@@ -19,7 +20,7 @@ namespace Game
 
         private void Start()
         {
-            _behaviour.LaunchPersistentMovement();
+            _behaviour.LaunchPersistentBehaviour();
         }
 
         public void RandomizePosition()
@@ -37,14 +38,9 @@ namespace Game
                 Quaternion.Euler(0, Random.Range(0, 360), 0));
         }
 
-        protected override void HandleCollisionEnter(Collision collision)
+        protected override void HandleCollision(Collision collision)
         {
-            _behaviour.HandleCollisionEnter(collision);
-        }
-
-        protected override void HandleCollisionExit(Collision collision)
-        {
-            _behaviour.HandleCollisionExit(collision);
+            _behaviour.HandleCollision(collision);
         }
     }
 }

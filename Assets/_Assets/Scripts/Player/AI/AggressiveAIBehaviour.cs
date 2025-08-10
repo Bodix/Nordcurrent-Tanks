@@ -9,7 +9,7 @@ namespace Game
     {
         public FloatRange ShootRandomInterval = new(1f, 2f);
         
-        protected override IEnumerator ShootCoroutine()
+        protected override IEnumerator ShootingCoroutine()
         {
             while (IsActive)
             {

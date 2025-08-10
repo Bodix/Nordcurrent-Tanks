@@ -15,15 +15,12 @@ namespace Game
 
         protected virtual void Awake()
         {
-            _tank.CollisionEnter += HandleCollisionEnter;
-            _tank.CollisionExit += HandleCollisionExit;
+            _tank.Collided += HandleCollision;
             _tank.Killed += DelayedRespawn;
         }
 
-
         protected abstract Pose GetRespawnPose();
-        protected abstract void HandleCollisionEnter(Collision collision);
-        protected abstract void HandleCollisionExit(Collision collision);
+        protected abstract void HandleCollision(Collision collision);
 
         private void DelayedRespawn()
         {

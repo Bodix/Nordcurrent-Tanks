@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using Evolutex.Evolunity.Structs;
 using Game.Configs;
 using UnityConstants;
 using UnityEngine;
@@ -17,17 +17,12 @@ namespace Game
         protected Tank Tank;
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private MonoBehaviour _coroutineRunner;
-        private List<Collision> _currentCollisions;
         private Coroutine _movementCoroutine;
         private Coroutine _rotationCoroutine;
+        private Coroutine _shootingCoroutine;
         private Coroutine _collisionCoroutine;
 
         public bool IsActive { get; set; } = true;
-
-        private void Awake()
-        {
-            _currentCollisions = new List<Collision>();
-        }
 
         public void Initialize(MonoBehaviour coroutineRunner, Tank tank)
         {
@@ -35,19 +30,18 @@ namespace Game
             Tank = tank;
         }
 
-        public void LaunchPersistentMovement()
+        public void LaunchPersistentBehaviour()
         {
             _movementCoroutine = _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
             _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
+            _shootingCoroutine = _coroutineRunner.StartCoroutine(ShootingCoroutine());
         }
 
-        public void HandleCollisionEnter(Collision collision)
+        public void HandleCollision(Collision collision)
         {
-            _currentCollisions.Add(collision);
-
             if (collision.gameObject.CompareTag(Tag.Wall))
             {
-                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(180));
+                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(180 - new FloatRange(1, 45).RandomWithin));
             }
             else if (collision.gameObject.layer == Layer.Tank)
             {
@@ -55,20 +49,17 @@ namespace Game
             }
         }
 
-        public void HandleCollisionExit(Collision collision)
-        {
-            _currentCollisions.Remove(collision);
-        }
+        protected abstract IEnumerator ShootingCoroutine();
 
-        protected abstract IEnumerator ShootCoroutine();
-
-        private void StopPersistentMovement()
+        private void StopPersistentBehaviour()
         {
             _coroutineRunner.StopCoroutine(_movementCoroutine);
             _coroutineRunner.StopCoroutine(_rotationCoroutine);
+            _coroutineRunner.StopCoroutine(_shootingCoroutine);
 
             _movementCoroutine = null;
             _rotationCoroutine = null;
+            _shootingCoroutine = null;
         }
 
         private IEnumerator PersistentMovementCoroutine()
@@ -94,8 +85,9 @@ namespace Game
         private IEnumerator ChangeRotationCoroutine(float rotationDegrees)
         {
             float sign = Mathf.Sign(Random.Range(-1, 1));
-            float prevRotation = Tank.transform.rotation.eulerAngles.y;
-            while (Mathf.Abs(Tank.transform.rotation.eulerAngles.y - prevRotation) < rotationDegrees)
+            Quaternion prevRotation = Tank.transform.rotation;
+
+            while (Quaternion.Angle(prevRotation, Tank.transform.rotation) < rotationDegrees)
             {
                 Tank.Rotate(sign);
 
@@ -105,11 +97,11 @@ namespace Game
 
         private IEnumerator CollisionCoroutine(float rotationDegrees)
         {
-            StopPersistentMovement();
+            StopPersistentBehaviour();
 
             yield return ChangeRotationCoroutine(rotationDegrees);
 
-            LaunchPersistentMovement();
+            LaunchPersistentBehaviour();
 
             _collisionCoroutine = null;
         }
