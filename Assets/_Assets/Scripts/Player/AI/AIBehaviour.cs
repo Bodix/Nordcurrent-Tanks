@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Game.Configs;
-using NaughtyAttributes;
 using UnityConstants;
 using UnityEngine;
 using Zenject;
@@ -19,14 +17,12 @@ namespace Game
         protected Tank Tank;
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private MonoBehaviour _coroutineRunner;
+        private List<Collision> _currentCollisions;
         private Coroutine _movementCoroutine;
         private Coroutine _rotationCoroutine;
         private Coroutine _collisionCoroutine;
 
         public bool IsActive { get; set; } = true;
-        [ShowNativeProperty]
-        public bool CollisionCoroutineActive => _collisionCoroutine != null;
-        private List<Collision> _currentCollisions;
 
         private void Awake()
         {
@@ -97,7 +93,7 @@ namespace Game
 
         private IEnumerator ChangeRotationCoroutine(float rotationDegrees)
         {
-            float sign = Mathf.Sign(UnityEngine.Random.Range(-1, 1));
+            float sign = Mathf.Sign(Random.Range(-1, 1));
             float prevRotation = Tank.transform.rotation.eulerAngles.y;
             while (Mathf.Abs(Tank.transform.rotation.eulerAngles.y - prevRotation) < rotationDegrees)
             {
