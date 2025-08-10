@@ -1,4 +1,5 @@
 ﻿using Evolutex.Evolunity.Extensions;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -6,7 +7,7 @@ namespace Game
 {
     public class AIPlayer : AbstractPlayer
     {
-        [Inject]
+        [Inject, ShowNonSerializedField]
         private AIBehaviour _behaviour;
 
         protected override void Awake()
@@ -14,6 +15,10 @@ namespace Game
             base.Awake();
 
             _behaviour.Initialize(this, _tank);
+        }
+
+        private void Start()
+        {
             _behaviour.LaunchPersistentMovement();
         }
 
