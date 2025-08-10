@@ -22,7 +22,7 @@ namespace Game
         private Coroutine _shootingCoroutine;
         private Coroutine _collisionCoroutine;
 
-        public bool IsActive { get; set; } = true;
+        public bool IsPlayingPersistentBehaviour { get; private set; }
 
         public void Initialize(MonoBehaviour coroutineRunner, Tank tank)
         {
@@ -35,17 +35,25 @@ namespace Game
             _movementCoroutine = _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
             _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
             _shootingCoroutine = _coroutineRunner.StartCoroutine(ShootingCoroutine());
+
+            IsPlayingPersistentBehaviour = true;
         }
 
         public void HandleCollision(Collision collision)
         {
-            if (collision.gameObject.CompareTag(Tag.Wall))
+            // 
+            if (!IsPlayingPersistentBehaviour)
+                return;
+            
+            if (collision.gameObject.layer == Layer.Tank)
             {
-                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(180 - new FloatRange(1, 45).RandomWithin));
+                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(
+                    CollisionCoroutine(_config.RotationChangeDegrees));
             }
-            else if (collision.gameObject.layer == Layer.Tank)
+            else if (collision.gameObject.CompareTag(Tag.Wall))
             {
-                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(CollisionCoroutine(_config.RotationChangeDegrees));
+                _collisionCoroutine ??= _coroutineRunner.StartCoroutine(
+                    CollisionCoroutine(180 - new FloatRange(1, 45).RandomWithin));
             }
         }
 
@@ -60,11 +68,13 @@ namespace Game
             _movementCoroutine = null;
             _rotationCoroutine = null;
             _shootingCoroutine = null;
+            
+            IsPlayingPersistentBehaviour = false;
         }
 
         private IEnumerator PersistentMovementCoroutine()
         {
-            while (IsActive)
+            while (IsPlayingPersistentBehaviour)
             {
                 Tank.Move(1);
 
@@ -74,7 +84,7 @@ namespace Game
 
         private IEnumerator PersistentRotationCoroutine()
         {
-            while (IsActive)
+            while (IsPlayingPersistentBehaviour)
             {
                 yield return new WaitForSeconds(_config.RotationChangeRandomInterval.RandomWithin);
 

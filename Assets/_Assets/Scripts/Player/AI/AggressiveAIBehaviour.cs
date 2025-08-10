@@ -11,7 +11,7 @@ namespace Game
         
         protected override IEnumerator ShootingCoroutine()
         {
-            while (IsActive)
+            while (IsPlayingPersistentBehaviour)
             {
                 yield return new WaitForSeconds(ShootRandomInterval.RandomWithin);
                 
