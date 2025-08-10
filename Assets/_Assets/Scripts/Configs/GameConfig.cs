@@ -6,7 +6,7 @@ namespace Game.Configs
     public class GameConfig : ScriptableObject
     {
         public int BotsCount = 10;
-        public Vector2 BotSpawnLimits = new(19, 19);
+        public Vector2 BotSpawnLimits = new(18, 18);
         /// <summary>
         /// In seconds.
         /// </summary>

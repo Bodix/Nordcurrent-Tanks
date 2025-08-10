@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   BotsCount: 10
-  BotSpawnLimits: {x: 19, y: 19}
+  BotSpawnLimits: {x: 18, y: 18}
   RespawnDelay: 1
