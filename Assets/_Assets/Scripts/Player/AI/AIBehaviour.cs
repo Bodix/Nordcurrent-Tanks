@@ -17,6 +17,7 @@ namespace Game
         protected Tank Tank;
         private readonly YieldInstruction _waitForFixedUpdateInstruction = new WaitForFixedUpdate();
         private MonoBehaviour _coroutineRunner;
+
         private Coroutine _movementCoroutine;
         private Coroutine _rotationCoroutine;
         private Coroutine _shootingCoroutine;
@@ -33,7 +34,7 @@ namespace Game
         public void LaunchPersistentBehaviour()
         {
             IsPlayingPersistentBehaviour = true;
-            
+
             _movementCoroutine = _coroutineRunner.StartCoroutine(PersistentMovementCoroutine());
             _rotationCoroutine = _coroutineRunner.StartCoroutine(PersistentRotationCoroutine());
             _shootingCoroutine = _coroutineRunner.StartCoroutine(ShootingCoroutine());
@@ -41,10 +42,12 @@ namespace Game
 
         public void HandleCollision(Collision collision)
         {
-            // 
+            // Eliminates incorrect logic in cases where one tank spawns on top of another tank
+            // at the start of the game, which causes a collision before the start of persistent
+            // behavior (thereby causing errors due to the absence of persistent behaviour coroutines).
             if (!IsPlayingPersistentBehaviour)
                 return;
-            
+
             if (collision.gameObject.layer == Layer.Tank)
             {
                 _collisionCoroutine ??= _coroutineRunner.StartCoroutine(
@@ -68,7 +71,7 @@ namespace Game
             _movementCoroutine = null;
             _rotationCoroutine = null;
             _shootingCoroutine = null;
-            
+
             IsPlayingPersistentBehaviour = false;
         }
 
